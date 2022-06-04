@@ -20,7 +20,8 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('user.urls')),     # user/urls.py 경로 추가
+    path('', include('user.urls')),
+    path('', include('movie.urls') ),
 ]
 
 

@@ -1,6 +1,8 @@
 
 from django.shortcuts import redirect, render
-from .models import UserModel
+
+from movie.models import GenreModel
+from .models import ProfileModel, UserModel
 from django.contrib.auth import get_user_model
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
@@ -10,7 +12,7 @@ from django.contrib.auth.decorators import login_required
 
 # user/views.py
 # Create your views here.
-def sign_up_view(request):
+def sign_up(request):
     if request.method == 'GET':
         user = request.user.is_authenticated
         if user:
@@ -21,7 +23,6 @@ def sign_up_view(request):
         username = request.POST.get('username', '')
         password = request.POST.get('password', '')
         password2 = request.POST.get('password2', '')
-        bio = request.POST.get('bio', '')
 
         if password != password2:
             return render(request, 'user/signup.html', {'error':'패스워드를 확인 해주세요'})
@@ -33,11 +34,30 @@ def sign_up_view(request):
             if exist_user:
                 return render(request, 'user/signup.html', {'error':'중복된 이름이 존재 합니다'})  # 중복된 사용자가 있을시 다시 signup 페이지로 이동
             else:
-                UserModel.objects.create_user(username=username, password=password, bio=bio)
+                UserModel.objects.create_user(username=username, password=password)
                 return redirect('/sign-in')  # 로그인 URL
 
 
-def sign_in_view(request):
+
+def create_profile(request):
+    if request.method == 'GET':
+        all_genre = GenreModel.objects.all()
+        return render(request, 'user/create_profile.html', {'genre':all_genre})
+    
+    elif request.method == 'POST':
+        profilename = request.POST.get('name', '')
+        genre = request.POST.get('genre', '')
+        
+        if profilename == '':
+            return render(request, 'user/create_profile.html', {'error':'프로필 이름 설정은 필수 잆니다.'})
+        else:
+            ProfileModel.objects.create_profile(profilename=profilename, genre=genre)
+            return redirect('/home.html')
+            
+    
+
+
+def sign_in(request):
     if request.method == 'POST':
         username = request.POST.get('username', '')
         password = request.POST.get('password', '')
@@ -55,6 +75,7 @@ def sign_in_view(request):
             return redirect('/')
         else:
             return render(request, 'user/signin.html')
+
 
 
 @login_required
