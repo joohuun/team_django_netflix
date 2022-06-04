@@ -21,10 +21,6 @@
                     <label for="password2">비밀번호 확인</label>
                     <input type="password" class="form-control" id="password2" name="password2">
                 </div>
-                {% comment %} <div class="form-group mt-2 mb-2">
-                    <label for="bio">나를 한마디로</label>
-                    <input type="text" class="form-control" id="bio" name="bio">
-                </div> {% endcomment %}
                 {% if error %}
                     <div class="alert alert-danger" role="alert">
                         {{ error }}
@@ -32,7 +28,7 @@
                 {% endif %}
                 <hr>
                 <div style="float: right">
-                    <button type="submit" class="btn btn-primary">회원가입</button>
+                    <button type="submit" class="btn btn-primary">다음 단계</button>
                     <a href="/sign-in" class="btn btn-secondary">로그인 페이지로</a>
                 </div>
             </form>

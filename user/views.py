@@ -1,13 +1,10 @@
 
 from django.shortcuts import redirect, render
-
 from movie.models import GenreModel
 from .models import ProfileModel, UserModel
 from django.contrib.auth import get_user_model
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
-
-
 
 
 # user/views.py
@@ -35,28 +32,24 @@ def sign_up(request):
                 return render(request, 'user/signup.html', {'error':'중복된 이름이 존재 합니다'})  # 중복된 사용자가 있을시 다시 signup 페이지로 이동
             else:
                 UserModel.objects.create_user(username=username, password=password)
-                return redirect('/sign-in')  # 로그인 URL
-
+                return redirect('/create-profile')  
 
 
 def create_profile(request):
     if request.method == 'GET':
-        all_genre = GenreModel.objects.all()
-        return render(request, 'user/create_profile.html', {'genre':all_genre})
+        genre = GenreModel.objects.all()
+        return render(request, 'user/createprofile.html', {'genre':genre})
     
     elif request.method == 'POST':
-        profilename = request.POST.get('name', '')
-        genre = request.POST.get('genre', '')
+        age = request.POST.get('age', None)  
+        profilename = request.POST.get('profilename', None)
+        genre_name = request.POST.get('genre', None)        
+        genre = GenreModel.objects.get(genre=genre_name)
+        profile = ProfileModel.objects.create(profilename=profilename, genre=genre, age=age)
+        return redirect('/sign-in', profile.pk)
         
-        if profilename == '':
-            return render(request, 'user/create_profile.html', {'error':'프로필 이름 설정은 필수 잆니다.'})
-        else:
-            ProfileModel.objects.create_profile(profilename=profilename, genre=genre)
-            return redirect('/home.html')
             
-    
-
-
+            
 def sign_in(request):
     if request.method == 'POST':
         username = request.POST.get('username', '')
