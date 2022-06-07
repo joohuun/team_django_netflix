@@ -4,7 +4,6 @@ from django.contrib.auth.models import AbstractUser  # 장고 기본 제공 유�
 from movie.models import GenreModel
 
 
-
 AGE_CHOICE = (
     ('All', 'All'),
     ('Kids', 'Kids'),   
@@ -32,9 +31,3 @@ class ProfileModel(models.Model):
       
     def __self__(self):
         return self.age +""+ self.profilename +""+ self.genre 
-    
-    
-
-        
-        
-    
