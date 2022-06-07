@@ -11,6 +11,7 @@
             integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
             crossorigin="anonymous"></script>
     <style>
+
         .title-center {
             text-align: center;
             margin-top: 50px;
@@ -52,14 +53,14 @@
     
 </head>
 <body>
-{% load static %}
+{% load static  %}
 <div calss="cover">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container">
-            <a class="navbar-brand" href="/">
+        <div class="container" >
+            <a class="navbar-brand" href="/" >
                 <img src="{% static 'netflix.png' %}">
             </a>
-            {% if user.is_authenticated %}
+            {% comment %} {% if user.is_authenticated %}
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
@@ -67,28 +68,22 @@
                         </li>
                     </ul>
                 </div>
-            {% endif %}
+            {% endif %} {% endcomment %}
             <form class="form-inline my-2 my-lg-0">
                 {% if not user.is_authenticated %}
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item active" style='margin-right:1%;'>
                             <button class="nav-link" href="/sign-in">로그인</button>
-                            {% comment %} <a class="nav-link" href="/sign-in"> 로그인 <span class="sr-only"></span></a> {% endcomment %}
                         </li>
                         <li class="nav-item active">
                             <button class="nav-link1" href="/sign-up">회원가입</button>
-                            {% comment %} <a class="nav-link" href="/sign-up"> 회원가입 <span class="sr-only"></span></a> {% endcomment %}
                         </li>
-                        {% comment %} <button class='bg-primary_red py-1 px-3 text-white md:text-lg rounded-md'>
-                            Logout
-                        </button> {% endcomment %}
-                        {% comment %} <button class="nav-link" href="/sign-up" style = 'background:red; color:white; border:none; border-radius:10%'>로그인</button> {% endcomment %}
                     </ul>
                 {% else %}
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item" disabled>
                             <span class="nav-link">
-                                {{ user.username }} 님 반갑습니다!
+                                {{ user.username }} 
                             </span>
                         </li>
                         <li class="nav-item">

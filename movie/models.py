@@ -1,4 +1,6 @@
+from distutils.command.upload import upload
 from re import T
+from tkinter.tix import Tree
 from django.db import models
 
 
@@ -19,10 +21,13 @@ class MovieModel(models.Model):
     class Meta:
         db_table = "movie"
         
-    title = models.CharField(max_length=50)
-    movie_genre = models.ManyToManyField(GenreModel)
-    user_rate = models.FloatField()
-    movie_rate = models.FloatField(null=True)
-    post_img = models.ImageField()
-    actor = models.CharField(max_length=256)
-    desc = models.TextField(null=True)
+    code = models.IntegerField()
+    title = models.CharField(max_length=100)
+    genre = models.ManyToManyField(GenreModel)
+    age = models.CharField(max_length=100)
+    openDate = models.CharField(max_length=100, blank=True, null=True)
+    rate = models.FloatField(blank=True, null=True)
+    participate = models.FloatField(blank=True, null=True)
+    actors = models.CharField(max_length=256, blank=True)
+    story = models.TextField(blank=True, null=True)
+    post_img = models.ImageField(upload_to='upload', height_field=None, width_field=None, blank=True, null=True)    
