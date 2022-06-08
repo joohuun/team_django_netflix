@@ -80,9 +80,9 @@ WSGI_APPLICATION = 'team_django_netflix.wsgi.application'
 DATABASES = {
     'default' : {
         'ENGINE' : 'django.db.backends.mysql',
-        'NAME' : 'testdb',
-        'USER' : 'root',
-        'PASSWORD' : '8105',
+        'NAME' : 'django_netflix',
+        'USER' : 'user',
+        'PASSWORD' : '1234',
         'HOST' : 'localhost',
         'PORT' : '3306',
     }
