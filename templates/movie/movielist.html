@@ -7,11 +7,11 @@
 <section>
     <div calss="row">
         {% for movie in movie %}
-         <li>영화코드: {{ movie.code }}</li>
-        <li>제목: {{ movie.title }}</li>
-        <li>스토리: {{ movie.story }}</li>
-        <li>유저평점: {{ movie.user_rate }}</li>
-        <li>크롤평점: {{ movie.rate }}</li>
+         <li>영화코드: {{ movie.title }}</li>
+        <li>제목: {{ movie.url }}</li>
+        <li>스토리: {{ movie.imgurl }}</li>
+        {% comment %} <li>유저평점: {{ movie.user_rate }}</li>
+        <li>크롤평점: {{ movie.rate }}</li> {% endcomment %}
         {% endfor %}
 
         {% comment %} {% for genre in movie_movie_genre %}
