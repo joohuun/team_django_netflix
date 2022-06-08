@@ -1,6 +1,3 @@
-from distutils.command.upload import upload
-from re import T
-from tkinter.tix import Tree
 from django.db import models
 
 
