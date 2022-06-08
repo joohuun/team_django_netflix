@@ -4,5 +4,6 @@ from . import views
 
 urlpatterns = [
     #path('', views.csvTomodel, name='csvTomodel'),
+    path('', views.home, name='home'),
     
 ]

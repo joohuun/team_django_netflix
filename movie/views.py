@@ -12,5 +12,5 @@ from django.contrib.auth.decorators import login_required
 @login_required
 def home(request):
     if request.method == 'GET':
-        movies = MovieModel.objects.all().order_by('title')                
+        movies = MovieModel.objects.all().order_by('title')             
         return render(request, 'movie/home.html', {'movies':movies})
