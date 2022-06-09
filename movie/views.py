@@ -14,3 +14,10 @@ def home(request):
     if request.method == 'GET':
         movies = MovieModel.objects.all().order_by('title')
         return render(request, 'movie/home.html', {'movies': movies})
+
+
+@login_required
+def detail(request):
+    if request.method == 'GET':
+        movies = MovieModel.objects.all().order_by('title')
+        return render(request, 'movie/detail.html', {'movies': movies})

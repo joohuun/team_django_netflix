@@ -1,0 +1,29 @@
+{% extends 'base.html'%}
+{% block content%}
+    {% for movie in movies %}
+        <div class="content">
+            <img class="img-0 slider-img" src="{{movie.imgurl}}">
+            <!--Hover Content-->
+            <div class="video_content">
+                <div class="play_btn">
+                    <div class="vid_name">{{movie.title}}</div>
+                    <div class="vid_detail">
+                        <ul class="vid_list">
+                            <li class="c_green">99% Match</li>
+                            <li class="br_round">13+</li>
+                            <li>{{movie.age}}</li>
+                            <li>{{movie.actors}}</li>
+                            <li>{{movie.rate}}</li>
+                            <li>{{movie.story}}</li>
+                        </ul>
+                    </div>
+                    <div class="vid_category">
+                        <ul class="vid_list">
+                            <li>{{movie.genre}}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}
