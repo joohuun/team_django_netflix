@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
-from decouple import config
+# from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,10 +21,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config('SECRET_KEY')
+# config('SECRET_KEY')
+SECRET_KEY = 'django-insecure-hv&-23ssylm-ckewe$^6#op8mpqd4nm6-@a9fa1gn055jtxu2m'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG', cast=bool)
+DEBUG = True  # config('DEBUG', cast=bool)
 
 ALLOWED_HOSTS = []
 
@@ -39,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'user',
-    'movie',    
+    'movie',
 ]
 
 MIDDLEWARE = [
@@ -57,7 +58,7 @@ ROOT_URLCONF = 'team_django_netflix.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],  
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -78,13 +79,9 @@ WSGI_APPLICATION = 'team_django_netflix.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 DATABASES = {
-    'default' : {
-        'ENGINE' : 'django.db.backends.mysql',
-        'NAME' : 'django_netflix',
-        'USER' : 'user',
-        'PASSWORD' : '1234',
-        'HOST' : 'localhost',
-        'PORT' : '3306',
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
@@ -126,7 +123,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 
-STATICFILES_DIRS=[
+STATICFILES_DIRS = [
     BASE_DIR/'static'
 ]
 
