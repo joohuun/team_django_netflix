@@ -7,7 +7,7 @@
     <div class="container">
         <div class="wrap">
             <h2 class="title-center"> 프로파일 생성 </h2>
-            <form class="form-area" method="post" action="/create-profile/">
+            <form class="form-area" method="POST" action="/create-profile/">
                 {% csrf_token %} {# 보안기능 #}
                 <div class="form-group mt-2 mb-2">
                     <label for="profilename">사용자 이름</label>
@@ -32,7 +32,7 @@
                 <div class="form-group mt-2 mb-2">
                     <select name="genre" id="genre">
                         {% for genre in genre %}
-                        <option value="{{ genre }}">{{ genre }}</option>
+                        <option value="{{ genre }}">{{ genre.genre_name }}</option>
                         {% endfor %}
                     <select>            
                 </div>

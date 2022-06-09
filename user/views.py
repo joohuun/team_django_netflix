@@ -1,4 +1,3 @@
-
 from django.shortcuts import redirect, render
 from movie.models import GenreModel
 from .models import ProfileModel, UserModel
@@ -37,19 +36,38 @@ def sign_up(request):
 
 def create_profile(request):
     if request.method == 'GET':
-        genre = GenreModel.objects.all()
+        genre = GenreModel.objects.all().order_by('id')
         return render(request, 'user/createprofile.html', {'genre':genre})
     
-    elif request.method == 'POST':
-        age = request.POST.get('age', None)  
-        profilename = request.POST.get('profilename', None)
-        genre_name = request.POST.get('genre', None)        
-        genre = GenreModel.objects.get(genre=genre_name)
-        profile = ProfileModel.objects.create(profilename=profilename, genre=genre, age=age)
-        return redirect('/sign-in', profile.pk)
+    elif request.method == 'POST':  
+        profilename = request.POST.get("profilename")
+        age = request.POST.get('age')
+        # genre = GenreModel.objects.get()
+        genre = GenreModel.objects.all() 
         
-            
-            
+               
+        PM = ProfileModel()
+        PM.profilename = profilename
+        PM.genre_name = genre
+        PM.age = age
+        PM.save()
+        
+        return redirect('/')
+        
+           
+        # genre = GenreModel.objects.all().order_by('-id')        
+        # genre_name_id = ProfileModel.objects.all()
+        # genre = genre_name_id        
+        # age = request.POST.get('age', None)  
+        # profilename = request.POST.get('profilename', None)
+
+        # profile = ProfileModel.objects.create(profilename=profilename, genre_name_id=genre_name_id, age=age)
+        # # profile.genre.name_id.add(genre_name)
+        # profile.save()
+        
+        # return redirect('/sign-in')
+        
+                        
 def sign_in(request):
     if request.method == 'POST':
         username = request.POST.get('username', '')

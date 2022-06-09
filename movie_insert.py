@@ -46,7 +46,6 @@ with open('movie_data.json', 'w', encoding='utf-8') as f:
 ############################################################################
 
    
-
 #     new_data["fields"] = {}  ##########
 #     new_data["fields"] = movie
 #     new_list.append(new_data)
