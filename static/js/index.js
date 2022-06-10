@@ -38,4 +38,6 @@ class Carousel{
 // 지금뜨는 컨텐츠
 const recommend = new Carousel(".carouselbox");
 // user가 찜한 컨텐츠
-const userlike = new Carousel(".second")
+const userlike = new Carousel(".second");
+// 상세페이지 관련영화 추천
+const movie_related = new Carousel(".detail");

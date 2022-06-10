@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail</title>
+    <script src="https://kit.fontawesome.com/b57dd44d80.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../../static/css/style.css"/>
+</head>
+<body>
+
+    <div class="recommend_movies">
+            <div class="wrapper">
+                <div class="list-title">관련 영화 추천</div>
+                <div class="carousel">
+                    <div class="carouselbox detail">
+                        {% for movie in movies %}
+                            <div class="content">
+                                <a href="{% url 'recommend_movies' movie.pk %}">
+                                    <img class="img-0 slider-img" src="{{movie.imgurl}}">
+                                    <!--Hover Content-->
+                                    <div class="video_content">
+                                        <div clpyass="play_btn">
+                                            <div class="vid_name">{{movie.title}}</div>
+                                            <div class="vid_detail">
+                                                <ul class="vid_list">
+                                                    <li class="c_green">99% Match</li>
+                                                    <li class="br_round">13+</li>
+                                                    <li>{{movie.runningtime}}</li>
+                                                </ul>
+                                            </div>
+                                            <div class="vid_category">
+                                                <ul class="vid_list">
+                                                    <li>{{movie.genre}}</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <button class="switchLeft sliderButton" onclick="movie_related.sliderScrollLeft()"><</a>
+                    <button class="switchRight sliderButton" onclick="movie_related.sliderScrollRight()">></butt>
+                </div>
+            </div>
+
+
+
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.0.0-alpha.1/axios.js"></script>
+        <script src="../../static/js/index.js"></script>
+    </div>
+
+    
+    
+
+    
+</body>
+</html>

@@ -27,7 +27,9 @@ video{
 }
 .overlay{
     position: absolute;
+    /* width: 100%; */
     top: 0;
+    right:0;
     left: 0;
     width: calc(100%-50px);
     padding: 0 50px;

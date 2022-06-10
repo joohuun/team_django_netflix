@@ -5,5 +5,8 @@ from . import views
 urlpatterns = [
     #path('', views.csvTomodel, name='csvTomodel'),
     path('', views.home, name='home'),
+    path('<int:pk>', views.recommend_movies, name='recommend_movies'),
+    
+
     
 ]
