@@ -5,5 +5,5 @@ from . import views
 urlpatterns = [
     #path('', views.csvTomodel, name='csvTomodel'),
     path('', views.home, name='home'),
-    path('detail/', views.detail, name='detail'),
+    path('<int:id>', views.detail, name='detail'),
 ]
