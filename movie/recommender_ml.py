@@ -37,6 +37,7 @@ class ContentsRecommender:
         for pk in list(index):
             result = MovieModel.objects.get(pk=pk)
             results.append(result)
+        print(results)
         return results
 
 similarmovies = ContentsRecommender()

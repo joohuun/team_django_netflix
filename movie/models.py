@@ -1,23 +1,36 @@
-from re import T
 from django.db import models
+from user.models import UserModel
 
 
-# 장르 모델 
+COMMENT_POINT_CHOICES = (
+    ('1', 1),
+    ('2', 2),
+    ('3', 3),
+    ('4', 4),
+    ('5', 5),
+    ('6', 6),
+    ('7', 7),
+    ('8', 8),
+    ('9', 9),
+    ('10', 10),
+)
+
+
+# 장르 모델
 class GenreModel(models.Model):
     class Meta:
         db_table = 'genre'
-        
+
     def __str__(self):
         return self.genre_name
-        
-    genre_name = models.CharField(max_length=50, null=True)
 
+    genre_name = models.CharField(max_length=50, null=True)
 
 
 class MovieModel(models.Model):
     class Meta:
         db_table = "movie"
-        
+
     title = models.CharField(max_length=256, blank=True, null=True)
     url = models.CharField(max_length=256, blank=True, null=True)
     imgurl = models.CharField(max_length=256, blank=True, null=True)
@@ -28,3 +41,18 @@ class MovieModel(models.Model):
     actors = models.CharField(max_length=256, blank=True, null=True)
     rate = models.FloatField(blank=True, null=True)
     story = models.TextField(blank=True, null=True)
+
+
+class MovieComment(models.Model):
+    class Meta:
+        db_table = 'comment'
+
+    user = models.ForeignKey(UserModel, on_delete=models.CASCADE)
+    movie = models.ForeignKey(MovieModel, on_delete=models.CASCADE)
+    comment = models.CharField(max_length=256)
+    user_rate = models.CharField(max_length=5, choices=COMMENT_POINT_CHOICES)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.comment

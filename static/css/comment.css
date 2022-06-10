@@ -1,0 +1,157 @@
+body {
+    background-color: #181818;
+    color: #FFFFFF;
+}
+
+/* 이건 왜 적용이 안되지.. */
+/* 어 뭐야 됐다 */
+.comment {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.review_text_box {
+    width: 640px;
+    max-width: 100%;
+    font-size: 20px;
+    border-top: 1px solid #DBDBDB;
+    border-bottom: 1px solid #DBDBDB;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+.comment_box {
+    width: 640px;
+    max-width: 100%;
+    max-height: auto;
+    font-size: 16px;
+    border: 1px solid #DBDBDB;
+    padding: 10px;
+}
+
+.email_and_rate {
+    width: 640px;
+    max-width: 100%;
+    height: 40px;
+    max-height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.email_box {
+    font-size: 16px;
+}
+
+.rate_box_name {
+    font-size: 16px;
+    margin-left: 10px;
+}
+
+.rate_option {
+    width: 50px;
+    height: 25px;
+    font-size: 15px;
+    border: 1px solid #DBDBDB;
+    border-radius: 3px;
+    margin-left: 5px;
+}
+
+.comment_text_box {
+    display: flex;
+    justify-content: center;
+}
+
+.comment_text {
+    background-color: #000000;
+    color: #FFFFFF;
+    width: 600px;
+    max-width: 100%;
+    max-height: auto;
+    border: 1px solid #DBDBDB;
+    border-radius: 3px;
+    margin: 10px;
+    padding: 5px;
+}
+
+.button_box {
+    display: flex;
+    justify-content: end;
+}
+
+.submit_button {
+    background-color: #000000;
+    color: #FFFFFF;
+    width: 80px;
+    height: 40px;
+    font-size: 16px;
+    border: 1px solid #DBDBDB;
+    border-radius: 3px;
+    margin: 10px;
+}
+
+.comment_list {
+    width: 640px;
+    max-width: 100%;
+    border: 1px solid #DBDBDB;
+    margin-top: 20px;
+    padding: 10px;
+    display: block;
+}
+
+.name_and_delete {
+    height: 30px;
+    display: flex;
+    align-items: center;
+}
+
+.name_and_delete>a {
+    background-color: #F15F5F;
+    color: #FFFFFF;
+    margin-left: 10px;
+    padding: 1px;
+    border: 1px solid #CC3D3D;
+    border-radius: 5px;
+    text-decoration-line: none;
+}
+
+.comment_and_rate {
+    display: block;
+}
+
+.comment_list_ul {
+    display: flex;
+    padding-left: 0px;
+    list-style: none;
+}
+
+.comment_list_ul li {
+    background-color: #000000;
+    color: #FFFFFF;
+    border: 1px solid #DBDBDB;
+    border-radius: 3px;
+    margin-right: 10px;
+    margin-left: 10px;
+    padding: 4px;
+}
+
+.comment_list_ul a {
+    text-decoration-line: none;
+}
+
+.comment_list_ul a:link {
+    color: #FFFFFF;
+    text-decoration-line: none;
+}
+
+.comment_list_ul a:visited {
+    color: #FFFFFF;
+    text-decoration-line: none;
+}
+
+.comment_list_ul a:active {
+    color: #DBDBDB;
+    text-decoration-line: none;
+}
