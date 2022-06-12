@@ -1,0 +1,128 @@
+[
+    {
+      "model": "movie.genremodel",
+      "fields": {
+        "genre_name": "미스터리"
+      }
+    },
+    {
+      "model": "movie.genremodel",
+      "fields": {
+        "genre_name": "공포"
+      }
+    },
+    {
+      "model": "movie.genremodel",
+      "fields": {
+        "genre_name": "멜로·로맨스"
+      }
+    },
+    {
+      "model": "movie.genremodel",
+      "fields": {
+        "genre_name": "뮤지컬"
+      }
+    },
+    {
+      "model": "movie.genremodel",
+      "fields": {
+        "genre_name": "드라마"
+      }
+    },
+    {
+      "model": "movie.genremodel",
+      "fields": {
+        "genre_name": "액션"
+      }
+    },
+    {
+      "model": "movie.genremodel",
+      "fields": {
+        "genre_name": "블록버스터"
+      }
+    },
+    {
+      "model": "movie.genremodel",
+      "fields": {
+        "genre_name": "범죄"
+      }
+    },
+    {
+      "model": "movie.genremodel",
+      "fields": {
+        "genre_name": "스릴러"
+      }
+    },
+    {
+      "model": "movie.genremodel",
+      "fields": {
+        "genre_name": "어드벤처"
+      }
+    },
+    {
+      "model": "movie.genremodel",
+      "fields": {
+        "genre_name": "공포"
+      }
+    },
+    {
+      "model": "movie.genremodel",
+      "fields": {
+        "genre_name": "SF"
+      }
+    },
+    {
+      "model": "movie.genremodel",
+      "fields": {
+        "genre_name": "가족"
+      }
+    },
+    {
+      "model": "movie.genremodel",
+      "fields": {
+        "genre_name": "다큐멘터리"
+      }
+    },
+    {
+      "model": "movie.genremodel",
+      "fields": {
+        "genre_name": "서부"
+      }
+    },
+    {
+      "model": "movie.genremodel",
+      "fields": {
+        "genre_name": "실화"
+      }
+    },
+    {
+      "model": "movie.genremodel",
+      "fields": {
+        "genre_name": "애니메이션"
+      }
+    },
+    {
+      "model": "movie.genremodel",
+      "fields": {
+        "genre_name": "느와르"
+      }
+    },
+    {
+      "model": "movie.genremodel",
+      "fields": {
+        "genre_name": "판타지"
+      }
+    },
+    {
+      "model": "movie.genremodel",
+      "fields": {
+        "genre_name": "코미디"
+      }
+    },
+    {
+      "model": "movie.genremodel",
+      "fields": {
+        "genre_name": "전쟁"
+      }
+    }
+  ]

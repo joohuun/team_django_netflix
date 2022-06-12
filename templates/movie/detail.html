@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail</title>
+    <script src="https://kit.fontawesome.com/b57dd44d80.js" crossorigin="anonymous"></script>
+    
+    {# 상세페이지 중단 #}
+    <link rel="stylesheet" href="{% static 'css/comment.css' %}"/>
+    
+    {# 상세페이지 하단 #}
+    <link rel="stylesheet" href="{% static 'css/movie_list.css' %}"/>
+
+</head>
+<body>
+    <form method="post" action="{{movie.pk}}/like">
+        {% csrf_token %}
+        <button type="submit">좋아요</button>
+    </form>
+    <a>{{movie.title}}</a>
+
+    {# 상세페이지 중단 #}
+    <div class="comment">
+        <div class="review_text_box">REVIEW</div>
+        {# 댓글 작성하는 곳 #}
+        <form class="comment_box" action="/movie/comment/create/{{ movie.id }}" method="post">
+            {% csrf_token %}
+            <div class="email_and_rate">
+                <h4 class="email_box">{{ user.user_id }}</h4>
+                <div>
+                    <label class="rate_box_name" for="user_rate">평점 :</label>
+                    <select class="rate_option" id="user_rate" name="user_rate">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5" selected>5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                    </select>
+                </div>
+            </div>
+            <div class="comment_text_box">
+                <input type="text" class="comment_text" id='comment' name='comment' placeholder="댓글을 작성 해 주세요." />
+            </div>
+            <div class="button_box">
+                <button type="submit" class="submit_button">등록</button>
+            </div>
+        </form>
+
+        {# 작성된 댓글 불러오기 #}
+        {% for comment in comment_list %}
+        <div class="comment_list">
+            <div class="name_and_delete">
+                <h4> {{ comment.user }} </h4>
+                {% if comment.user == user %}
+                <a href="/{{movie.pk}}/comment/delete/{{ comment.id }}">
+                    <span>삭제</span>
+                </a>
+                {% endif %}
+            </div>
+            <div class="comment_and_rate">
+                <p> {{ comment.comment }} </p>
+                <p> {{ comment.user_rate }} 점 <span> - {{ comment.created_at | timesince }} 전</span></p>
+            </div>
+        </div>
+        {% endfor %}
+
+        <ul class="comment_list_ul">
+            <!-- 이전 페이지 -->
+            {% if comment_list.has_previous %}
+            <li>
+                <a href="?page={{ comment_list.previous_page_number }}">이전</a>
+            </li>
+            {% else %}
+            <li>
+                <a tabindex="-1" aria-disabled="true" href="#">이전</a>
+            </li>
+            {% endif %}
+
+            <!-- 페이지 리스트 -->
+            {% for page_number in comment_list.paginator.page_range %}
+            {% if page_number == comment_list.number %}
+            <li>
+                <a href="?page={{ page_number }}">{{ page_number }}</a>
+            </li>
+            {% else %}
+            <li>
+                <a href="?page={{ page_number }}">{{ page_number }}</a>
+            </li>
+            {% endif %}
+            {% endfor %}
+
+            <!-- 다음 페이지 -->
+            {% if comment_list.has_next %}
+            <li>
+                <a href="?page={{ comment_list.next_page_number }}">다음</a>
+            </li>
+            {% else %}
+            <li>
+                <a tabindex="-1" aria-disabled="true" href="#">다음</a>
+            </li>
+            {% endif %}
+        </ul>
+    </div>
+
+    {# 상세페이지 하단 #}
+    <div class="recommend_movies">
+            <div class="wrapper">
+                <div class="list-title">관련 영화 추천</div>
+                <div class="carousel">
+                    <div class="carouselbox detail">
+                        {% for movie, genres in infos.items %}
+                            <div class="content">
+                                <a href="{% url 'recommend_movies' movie.pk %}">
+                                    <img class="img-0 slider-img" src="{{movie.imgurl}}">
+                                    <!--Hover Content-->
+                                    <div class="video_content ">
+                                        <div class="play_btn">
+                                            <div class="vid_name">{{movie.title}}</div>
+                                            <div class="vid_detail">
+                                                <ul class="vid_list">
+                                                    <li class="c_green">{{movie.rate}}</li>
+                                                    <li class="br_round">{{movie.age}}</li>
+                                                    <li>{{movie.runningtime}}</li>
+                                                </ul>
+                                            </div>
+                                            <div class="vid_category">
+                                                <ul class="vid_list">
+                                                    {% for genre in genres%}
+                                                    <li>{{genre.genre_name}}</li>
+                                                    {% endfor %}
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <button class="switchLeft sliderButton" onclick="movie_related.sliderScrollLeft()"><</a>
+                    <button class="switchRight sliderButton" onclick="movie_related.sliderScrollRight()">></butt>
+                </div>
+            </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.0.0-alpha.1/axios.js"></script>
+        <script src="../../static/js/index.js"></script>
+    </div>
+</body>
+</html>
