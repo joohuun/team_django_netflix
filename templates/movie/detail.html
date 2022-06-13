@@ -8,67 +8,66 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detail</title>
+
     <script src="https://kit.fontawesome.com/b57dd44d80.js" crossorigin="anonymous"></script>
     {# 상세페이지 상단 #}
-    <link rel="stylesheet" href="{% static 'css/movie_info.css' %}"/> 
+    <link rel="stylesheet" href="{% static 'css/movie_info.css' %}" />
     {# 상세페이지 중단 #}
-    <link rel="stylesheet" href="{% static 'css/comment.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/comment.css' %}" />
     {# 상세페이지 하단 #}
-    <link rel="stylesheet" href="{% static 'css/movie_list.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/movie_list.css' %}" />
 
 </head>
+
 <body>
-<div class="overlay">
-<!-- 상단바 -->
-    <div class="header">
-        <a class="logo" href="/" style="text-decoration-line: none;">NETFLIX</a>
-        <div class="nav">
-            <a class="nav-item" href="/">홈</a>
-            <a class="nav-item" href="#rate-ranking">상위 평점 영화</a>
-            <a class="nav-item" href="#now_hottest">New! 요즘 대세영화</a>
-            <a class="nav-item" href="#like-contents">내가 찜한 콘텐츠</a>
-        </div>
-        <div class="menu">
-            <div id="search">
-            <form method="get" action="{% url 'movie:search' %}" >
-                <input type="search" name="kw" placeholder="검색">
-            </form>
+    <div class="overlay">
+        <div class="header">
+            <a class="logo" href="/">NETFLIX</a>
+            <div class="nav">
+                <a class="nav-item" href="/">홈</a>
             </div>
-            <div class="menu-item"> {{user.username}} </div>
-            <a class="menu-item" href={% url 'logout' %} style="color:white; text-decoration-line: none;">
-                Logout
-            </a>
+            <div class="menu">
+                <div id="search">
+                    <form method="get" action="{% url 'movie:search' %}" >
+                        <input type="search" name="kw" placeholder="검색">
+                    </form>
+                </div>
+                <div class="menu-item"> {{user.username}} </div>
+                <a class="menu-item" href={% url 'logout' %} style="color:white; text-decoration-line: none;">
+                    Logout
+                </a>
+            </div>
         </div>
     </div>
-            <!-- 인기 영화 띄우기 -->
-    </div>
+
     {# 상세페이지 상단 #}
-    <div class = "img-box">
-        <img src="{{movie.imgurl}}">
+    <div class="img-box">
+        <a href="{{movie.url}}"> <img src="{{movie.imgurl}}"> </a>
     </div>
     <main>
         <div class="description">
             <h1>{{movie.title}}</h1>
             <h3> {{movie.age}} / {{movie.actors}}/ {{movie.rate}}</h3>
-            <p>{{movie.story}}</p>        
+            <p>{{movie.story}}</p>
+            <div class="age-info">
+                <i class="fa-solid fa-rotate-right"></i>
+                <div class="age">
+                    {{movie.age}}
+                </div>
+            </div>
             <div class="buttons">
                 <div>
-                <form action="{% url 'movie:likes' movie.pk %}" method='POST'>
-                    {% csrf_token %}
-                    {% if user in movie.like_users.all %}
-                    <button class="play" value="좋아요 취소"><span>취소</span></button>
-                    {% else %}
-                    <button class="play" value="좋아요"><span>좋아요</span></button>
-                    {% endif %}
-                </form>
+                    <form action="{% url 'movie:likes' movie.pk %}" method='POST'>
+                        {% csrf_token %}
+                        {% if user in movie.like_users.all %}
+                        <button class="play" value="좋아요 취소"><span>취소</span></button>
+                        {% else %}
+                        <button class="play" value="좋아요"><span>좋아요</span></button>
+                        {% endif %}
+                    </form>
                 </div>
-                <button class="detail"><i class="fa-solid fa-circle-info"></i>{{movie.like_users.count}}명이 좋아합니다.</button>
-            </div>
-        </div>    
-        <div class="age-info">
-            <i class="fa-solid fa-rotate-right"></i>
-            <div class="age">
-                {{movie.age}}
+                <button class="detail"><i class="fa-solid fa-circle-info"></i>{{movie.like_users.count}}명이
+                    좋아합니다.</button>
             </div>
         </div>
     </main>
@@ -163,42 +162,42 @@
 
     {# 상세페이지 하단 #}
     <div class="recommend_movies">
-            <div class="wrapper">
-                <div class="list-title">관련 영화 추천</div>
-                <div class="carousel">
-                    <div class="carouselbox detail">
-                        {% for movie, genres in infos.items %}
-                            <div class="content">
-                                <a href="{% url 'movie:recommend_movies' movie.pk %}">
-                                    <img class="img-0 slider-img" src="{{movie.imgurl}}">
-                                    <!--Hover Content-->
-                                    <div class="video_content ">
-                                        <div class="play_btn">
-                                            <div class="vid_name">{{movie.title}}</div>
-                                            <div class="vid_detail">
-                                                <ul class="vid_list">
-                                                    <li class="c_green">{{movie.rate}}</li>
-                                                    <li class="br_round">{{movie.age}}</li>
-                                                    <li>{{movie.runningtime}}</li>
-                                                </ul>
-                                            </div>
-                                            <div class="vid_category">
-                                                <ul class="vid_list">
-                                                    {% for genre in genres%}
-                                                    <li>{{genre.genre_name}}</li>
-                                                    {% endfor %}
-                                                </ul>
-                                            </div>
-                                        </div>
+        <div class="wrapper">
+            <div class="list-title">관련 영화 추천</div>
+            <div class="carousel">
+                <div class="carouselbox relation">
+                    {% for movie, genres in infos.items %}
+                    <div class="content">
+                        <a href="{% url 'movie:recommend_movies' movie.pk %}">
+                            <img class="img-0 slider-img" src="{{movie.imgurl}}">
+                            <!--Hover Content-->
+                            <div class="video_content">
+                                <div class="play_btn">
+                                    <div class="vid_name">{{movie.title}}</div>
+                                    <div class="vid_detail">
+                                        <ul class="vid_list">
+                                            <li class="c_green">{{movie.rate}}</li>
+                                            <li class="br_round">{{movie.age}}</li>
+                                            <li>{{movie.runningtime}}</li>
+                                        </ul>
                                     </div>
-                                </a>
+                                    <div class="vid_category">
+                                        <ul class="vid_list">
+                                            {% for genre in genres%}
+                                            <li>{{genre.genre_name}}</li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                </div>
                             </div>
-                        {% endfor %}
+                        </a>
                     </div>
-                    <button class="switchLeft sliderButton" onclick="movie_related.sliderScrollLeft()"><</button>
-                    <button class="switchRight sliderButton" onclick="movie_related.sliderScrollRight()">></button>
+                    {% endfor %}
                 </div>
+                <button class="switchLeft sliderButton" onclick="movie_related.sliderScrollLeft()"><</button>
+                <button class="switchRight sliderButton" onclick="movie_related.sliderScrollRight()">></button>
             </div>
+        </div>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.0.0-alpha.1/axios.js"></script>
         <script src="../../static/js/index.js"></script>
     </div>
@@ -230,4 +229,18 @@
         </div>
     </footer>
 </body>
+
 </html>
+© 2022 GitHub, Inc.
+Terms
+Privacy
+Security
+Status
+Docs
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About
+Loading complete

@@ -140,7 +140,7 @@ video {
 /* 카테고리- 지금 뜨는 컨텐츠 */
 .category-list {
     position: absolute;
-    top: 600px;
+    top: 150px;
     left: 50px;
     right: 50px;
     scroll-behavior: smooth;

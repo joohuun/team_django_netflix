@@ -145,5 +145,7 @@ def search(request):
         for movie in movies:
             genres = movie.genre.all()
             infos[movie] = genres
+            
+    
         
     return render(request, 'movie/search.html', {'query':query, 'movies':movies, 'genres':genres, 'infos': infos})

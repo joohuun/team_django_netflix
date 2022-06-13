@@ -40,10 +40,6 @@
                     </form>
                     </div>
                     <div class="menu-item"> {{user.username}} </div>
-
-                    <div class="menu-item">
-                        <i class="fa-solid fa-bell"></i>
-                    </div>
                     <a class="menu-item" href={% url 'logout' %} style="color:white; text-decoration-line: none;">
                         Logout
                     </a>
@@ -155,7 +151,7 @@
                     {% endfor %}
                 </div>
                 <button class="switchLeft sliderButton" onclick="userlike.sliderScrollLeft()"><</button>
-                <button class="switchRight sliderButton" onclick="userlike.sliderScrollRight()">></butt>
+                <button class="switchRight sliderButton" onclick="userlike.sliderScrollRight()">></button>
             </div>
         </div>
         <div class="wrapper">
