@@ -11,15 +11,16 @@ from .models import MovieComment, MovieModel
 import random
 
 connection = pymysql.connect(
-        host='localhost',
-        port = 3306,
-        user='root',
-        password='#won971219',
-        db='django_netflix',
-        charset = 'utf8',
-        autocommit = True,
-        cursorclass=pymysql.cursors.DictCursor
-        )
+    host='localhost',
+    port=3306,
+    user='root',
+    password='5781',
+    db='testdb',
+    charset='utf8',
+    autocommit=True,
+    cursorclass=pymysql.cursors.DictCursor
+)
+
 
 class Collab_recommender:
     def __init__(self):
@@ -46,11 +47,13 @@ class Collab_recommender:
         # 1. 가장 비슷한 1명이 높은 평점을 준 영화 상위 20개 뽑기
         # 1번 유저와 가장 비슷한 유저를 뽑고,
         try:
-            similar_user = self.user_based_collab[user-1].sort_values(ascending=False)[:3].index[1]
+            similar_user = self.user_based_collab[user -
+                                                  1].sort_values(ascending=False)[:3].index[1]
             print(similar_user)
             # 그 유저가 좋아했던 영화를 평점 내림차순으로 출력
             print(self.ratings_matrix)
-            index = self.ratings_matrix.iloc[similar_user].sort_values(ascending=False)[:20]
+            index = self.ratings_matrix.iloc[similar_user].sort_values(ascending=False)[
+                :20]
             #index = self.ratings_matrix.query(f"user_id == {similar_user}").sort_values(ascending=False, by=user, axis=1)
             print(list(index.index))
 
@@ -68,20 +71,6 @@ class Collab_recommender:
             random_items = random.sample(items, 10)
             print(random_items)
             return random_items
-            
-
-
-
 
 
 collab = Collab_recommender()
-
-
-
-
-
-
-
-
-
-
