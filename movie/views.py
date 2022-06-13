@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
 from .models import *
@@ -12,19 +12,27 @@ from django.views.decorators.csrf import csrf_exempt
 @login_required
 def home(request):
     if request.method == 'GET':
-        #collab_recommender();
-        # 전체 다불러옴
-        movies = MovieModel.objects.all().order_by('-pk')
-        infos = {}
-        genre_list = []
+        user_based = collab_recommender.collab
+        movies = user_based.collab_recommend(request.user.id)
+        print(request.user)
+        print(request.user.id)
+        rec ={}
         for movie in movies:
             genres = movie.genre.all()
-            infos[movie] = genres
+            rec[movie] = genres
+
+        # 전체 다불러옴
+        # movies = MovieModel.objects.all().order_by('-pk')
+        # infos = {}
+        # genre_list = []
+        # for movie in movies:
+        #     genres = movie.genre.all()
+        #     infos[movie] = genres
         # print(infos)
         
         # 찜한 컨텐츠
         user = request.user
-        user_like = list(user.like_movie.all())
+        user_like = list(user.like_articles.all())
         likes = {}
         for like in user_like:
             genre = like.genre.all()
@@ -38,21 +46,21 @@ def home(request):
             genre = rank.genre.all()
             ranking[rank] = genre
 
-        return render(request, 'movie/home.html', {'infos': infos, 'likes':likes, 'ranking':ranking})
+        return render(request, 'movie/home.html', {'rec':rec, 'likes':likes, 'ranking':ranking})
 
 
-# 상세페이지 중, 하
+# 상세페이지 상, 중, 하
 @login_required
 def recommend_movies(request, pk):
     if request.method == "GET":
         # 상
         movie_detail = MovieModel.objects.get(pk=pk)
-        print("movie_detail: ", movie_detail)
+        # print("movie_detail: ", movie_detail)
+        
         # 중 - 댓글
         page = request.GET.get('page', 1)
         comment_list = MovieComment.objects.filter(
             movie=pk).order_by('-created_at')
-
         paginator = Paginator(comment_list, 3)
         comments = paginator.get_page(page)
 
@@ -64,7 +72,7 @@ def recommend_movies(request, pk):
             genres = movie.genre.all()
             infos[movie] = genres
     
-        return render(request, 'movie/detail.html', {'movie':movie_detail,'infos': infos, 'comment_list': comments})
+        return render(request, 'movie/detail.html', {'movie':movie_detail, 'comment_list': comments, 'infos': infos})
 
 
 # 댓글 작성
@@ -93,22 +101,16 @@ def comment_delete(request,pk, id):
     comment = MovieComment.objects.get(id=id)
     #comment_id = comment.movie_id.id
     comment.delete()
-
     return redirect('/' + str(pk))
 
 
 # 좋아요
-@csrf_exempt
-def like(request, pk):
-    if request.method=="POST":
-        movie = MovieModel.objects.get(pk=pk)
-        movie.like_user.add(request.user)
-        movie.save()
-        print("완료")
-        return redirect("/")
+@login_required
+def likes(request, movie_pk):
+    movie = get_object_or_404(MovieModel, pk=movie_pk)
 
-    # elif request.method =="GET":
-    #     movie = MovieModel.objects.get(pk=pk)
-    #     likes = list(movie.like_user.all().values('user'))
-    #     print(likes)
-    #     return JsonResponse({'status':likes})
+    if movie.like_users.filter(pk=request.user.pk).exists():
+        movie.like_users.remove(request.user)
+    else:
+        movie.like_users.add(request.user)
+    return redirect('movie:recommend_movies', movie_pk)

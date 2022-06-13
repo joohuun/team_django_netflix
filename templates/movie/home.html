@@ -97,9 +97,9 @@
             <div class="list-title" id="now_hottest">지금 뜨는 컨텐츠</div>
             <div class="carousel">
                 <div class="carouselbox first">
-                    {% for movie, genres in infos.items %}
+                    {% for movie, genres in rec.items %}
                         <div class="content">
-                            <a href="{% url 'recommend_movies' movie.pk %}">
+                            <a href="{% url 'movie:recommend_movies' movie.pk %}">
                                 <img class="img-0 slider-img" src="{{movie.imgurl}}">
                                 <!--Hover Content-->
                                 <div class="video_content">
@@ -136,7 +136,7 @@
                 <div class="carouselbox second">
                     {% for movie, genres in likes.items %}
                         <div class="content">
-                            <a href="{% url 'recommend_movies' movie.pk %}">
+                            <a href="{% url 'movie:recommend_movies' movie.pk %}">
                                 <img class="img-0 slider-img" src="{{movie.imgurl}}">
                                 <!--Hover Content-->
                                 <div class="video_content">
@@ -174,7 +174,7 @@
                 <div class="carouselbox third">
                     {% for movie, genres in ranking.items %}
                         <div class="content">
-                            <a href="{% url 'recommend_movies' movie.pk %}">
+                            <a href="{% url 'movie:recommend_movies' movie.pk %}">
                                 <img class="img-0 slider-img" src="{{movie.imgurl}}">
                                 <!--Hover Content-->
                                 <div class="video_content">

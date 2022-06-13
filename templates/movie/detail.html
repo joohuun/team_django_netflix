@@ -9,20 +9,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detail</title>
     <script src="https://kit.fontawesome.com/b57dd44d80.js" crossorigin="anonymous"></script>
-    
+    {# 상세페이지 상단 #}
+    <link rel="stylesheet" href="{% static 'css/movie_info.css' %}"/> 
     {# 상세페이지 중단 #}
     <link rel="stylesheet" href="{% static 'css/comment.css' %}"/>
-    
     {# 상세페이지 하단 #}
     <link rel="stylesheet" href="{% static 'css/movie_list.css' %}"/>
 
 </head>
 <body>
-    <form method="post" action="{{movie.pk}}/like">
-        {% csrf_token %}
-        <button type="submit">좋아요</button>
-    </form>
-    <a>{{movie.title}}</a>
+    {# 상세페이지 상단 #}
+    <div class = "img-box">
+        <img src="{{movie.imgurl}}">
+    </div>
+    <main>
+        <div class="description">
+            <h1>{{movie.title}}</h1>
+            <h3> {{movie.age}} / {{movie.actors}}/ {{movie.rate}}</h3>
+            <p>{{movie.story}}</p>        
+            <div class="buttons">
+                <div>
+                <form action="{% url 'movie:likes' movie.pk %}" method='POST'>
+                    {% csrf_token %}
+                    {% if user in movie.like_users.all %}
+                    <button class="play" value="좋아요 취소"><span>취소</span></button>
+                    {% else %}
+                    <button class="play" value="좋아요"><span>좋아요</span></button>
+                    {% endif %}
+                </form>
+                </div>
+                <button class="detail"><i class="fa-solid fa-circle-info"></i>{{movie.like_users.count}}명이 좋아합니다.</button>
+            </div>
+        </div>    
+        <div class="age-info">
+            <i class="fa-solid fa-rotate-right"></i>
+            <div class="age">
+                {{movie.age}}
+            </div>
+        </div>
+    </main>
 
     {# 상세페이지 중단 #}
     <div class="comment">
@@ -120,7 +145,7 @@
                     <div class="carouselbox detail">
                         {% for movie, genres in infos.items %}
                             <div class="content">
-                                <a href="{% url 'recommend_movies' movie.pk %}">
+                                <a href="{% url 'movie:recommend_movies' movie.pk %}">
                                     <img class="img-0 slider-img" src="{{movie.imgurl}}">
                                     <!--Hover Content-->
                                     <div class="video_content ">
@@ -153,5 +178,32 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.0.0-alpha.1/axios.js"></script>
         <script src="../../static/js/index.js"></script>
     </div>
+
+    {# footer #}
+    <footer>
+        <div class="wrap">
+            <div class="social-icons">
+                <i class="fa-brands fa-facebook-square"></i>
+                <i class="fa-brands fa-instagram"></i>
+                <i class="fa-brands fa-twitter"></i>
+                <i class="fa-brands fa-youtube"></i>
+            </div>
+            <div class="options">
+                <div class="option">자막 및 음성</div>
+                <div class="option">음성 지원</div>
+                <div class="option">고객 센터</div>
+                <div class="option">기프트카드</div>
+                <div class="option">미디어 센터</div>
+                <div class="option">투자 정보(IR)</div>
+                <div class="option">입사 정보</div>
+                <div class="option">이용 약관</div>
+                <div class="option">개인 정보</div>
+                <div class="option">법적 고지</div>
+                <div class="option">쿠키 설정</div>
+                <div class="option">회사 정보</div>
+                <div class="option">문의하기</div>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>

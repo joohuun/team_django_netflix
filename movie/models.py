@@ -44,7 +44,8 @@ class MovieModel(models.Model):
     actors = models.CharField(max_length=256, blank=True, null=True)
     rate = models.FloatField(blank=True, null=True)
     story = models.TextField(blank=True, null=True)
-    like_user = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='like_movie', blank=True)
+    like_users = models.ManyToManyField(
+        settings.AUTH_USER_MODEL, related_name='like_articles', blank=True, null=True)
 
 
 # 영화 댓글 모델

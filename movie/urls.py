@@ -10,6 +10,8 @@ urlpatterns = [
          views.comment_create, name='comment-create'),
      path('<int:pk>/comment/delete/<int:id>',
          views.comment_delete, name='comment-delete'),
-     path('<int:pk>/like', views.like, name="like"),
+     path('<int:movie_pk>/likes', views.likes, name='likes'),
 
 ]
+
+app_name = "movie"
