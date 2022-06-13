@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    CreateProfile
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="wrap">
+            <h2 class="title-center"> 프로파일 생성 </h2>
+            <form class="form-area" method="post" action="/create-profile/">
+                {% csrf_token %} {# 보안기능 #}
+                <div class="form-group mt-2 mb-2">
+                    <label for="profilename">사용자 이름</label>
+                    <input type="text" class="form-control" id="prfilename" name="profilename">
+                </div>
+                {% comment %} <div class="form-group mt-2 mb-2">
+                    <label for="genre">장르</label>
+                    <input type="text" class="form-control" id="genre" name="genre">
+                </div>
+                <div class="form-group mt-2 mb-2">
+                    <label for="genre">장르</label>
+                    <input type="text" class="form-control" id="genre" name="genre">
+                </div> {% endcomment %}
+                <div class="form-group mt-2 mb-2">
+                    <select name="age" id="age">
+                        {% comment %} {% for genre in genre %} {% endcomment %}
+                        <option value="All">All</option>
+                        <option value="Kids">Kids</option>
+
+                        {% comment %} {% endfor %} {% endcomment %}
+                    <select>
+                </div>
+                <div class="form-group mt-2 mb-2">
+                    <select name="genre" id="genre">
+                        {% for genre in genre %}
+                        <option value="{{ genre }}">{{ genre }}</option>
+                        {% endfor %}
+                    <select>
+                </div>
+                <div class="form-group mt-2 mb-2">
+                    <select name="genre" id="genre">
+                        {% for genre in genre %}
+                        <option value="{{ genre }}">{{ genre }}</option>
+                        {% endfor %}
+                    <select>
+                </div>
+                {% if error %}
+                    <div class="alert alert-danger" role="alert">
+                        {{ error }}
+                    </div>
+                {% endif %}
+                <hr>
+                <div style="float: right">
+                    <button type="submit" class="btn btn-primary" href="/sign-in">회원가입</button>
+                    {% comment %} <a href="/sign-in" class="btn btn-secondary">로그인 페이지로</a> {% endcomment %}
+                </div>
+            </form>
+
+        </div>
+    </div>
+{% endblock %}

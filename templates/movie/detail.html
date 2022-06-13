@@ -1,0 +1,22 @@
+{% extends 'base.html'%}
+{% block content%}
+    <li>pk:{{movie.pk}}</li>
+    <img src="{{movie.imgurl}}">
+    <li>title:{{movie.title}}</li>
+    <li>age:{{movie.age}}</li>
+    <li>actors:{{movie.actors}}</li>
+    <li>rate:{{movie.rate}}</li>
+    <li>story:{{movie.story}}</li>
+    <li>좋아요 수:{{movie.like_users.count}}</li>
+
+    <div>
+      <form action="{% url 'movie:likes' movie.pk %}" method='POST'>
+        {% csrf_token %}
+        {% if user in movie.like_users.all %}
+          <input type="submit" value='좋아요 취소'>
+        {% else %}
+          <input type="submit" value='좋아요'>
+        {% endif %}
+      </form>
+    </div>
+{% endblock %}
