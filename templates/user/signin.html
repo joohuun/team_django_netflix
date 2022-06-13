@@ -1,34 +1,70 @@
-{% extends 'base.html' %}
-
-{% block title %}
-    로그인
-{% endblock %}
+{% extends '../userbase.html' %}
+    {% load static %}
+    {% block title %}
+    
+    Netflix - Login
+    {% endblock title %}
+    
+    {% block others %}
+    
+    <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
+    {% endblock others %}
 {% block content %}
-    <div class="container">
-        <div class="wrap">
-            <h2 class="title-center"> 로그인</h2>
-            <form class="form-area" method="post" action="/sign-in/">
+
+   
+    {% include 'navbar.html' with AUTH='false' %}
+    <header class="min-h-screen w-full bg-black bg-opacity-75 showcase border-gray-600 border-b-8 flex justify-center py-20 bg-no-repeat"  style="background-image: url('{% static 'background_netflix.jpg' %}');">
+        <div class="z-10 h-full py-32 md:py-0 text-gray-100 w-6/12  flex items-center flex-col">
+            <form method='POST' class="bg-black bg-opacity-70 py-8 px-4 w-8/12 rounded-md" >
+                <h1 class="text-4xl font-semibold text-center ">
+                    로그인
+                </h1>
                 {% csrf_token %}
-                <div class="form-group mt-2 mb-2">
-                    <label for="username">이름</label>
-                    <input type="text" class="form-control" id="username" name="username">
+                
+                {% comment %} {% if form.errors %}
+                
+                <div class=" text-center my-4 text-primary_red">
+                                               
+                <p class="text-primary_red ">
+                    
+                    {{form.non_field_errors}}
+                </p>
+               
+                   
                 </div>
-                <div class="form-group mt-2 mb-2">
-                    <label for="password">비밀번호</label>
-                    <input type="password" class="form-control" id="password" name="password">
+                {% endif %} {% endcomment %}
+                <div> 
+                    <Label class='text-lg font-medium mb-3' for="username">
+                        ID
+                    </Label>
+                    <input class="p-2 bg-gray-200 rounded-sm text-gray-900 outline-none block w-full" type="text" name="username" id="username" placeholder="ID">
                 </div>
-                <hr>
+                <div class='my-3'> 
+                    <Label class='text-lg font-medium mb-3' for="password">
+                        Password
+                    </Label>
+                    <input class="p-2 bg-gray-200 rounded-sm text-gray-900 outline-none block w-full" type="password" name="password" id="password" placeholder="Password">
+                </div>
                 {% if error %}
                     <div class="alert alert-danger" role="alert">
                         {{ error }}
                     </div>
                 {% endif %}
-                <div style="float: right">
-                    <button type="submit" class="btn btn-primary">로그인</button>
-                    <a href="/sign-up" class="btn btn-secondary">회원가입 페이지로</a>
+                {% comment %} {% if redirect_field_value %}
+                    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                {% endif %} {% endcomment %}
+                <div class="flex justify-center items-center">
+                    <button class="py-2 px-4 bg-primary_red text-gray-100 font-medium text-lg rounded-md" type="submit">
+                        로그인
+                    </button>
+                </div>
+
+                <div class="text-center my-4">
+                    <p>
+                        넷플릭스 회원이 아닌가요 ? <a href="{% url 'sign-up' %}" class="text-blue-600"> 지금 가입하세요</a>
+                    </p>
                 </div>
             </form>
-
         </div>
-    </div>
-{% endblock %}
+    </header>
+{% endblock content %}
