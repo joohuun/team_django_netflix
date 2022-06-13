@@ -6,4 +6,5 @@ urlpatterns = [
     #path('', views.csvTomodel, name='csvTomodel'),
     path('', views.home, name='home'),
     path('<int:id>', views.detail, name='detail'),
+    #path('<int:id>', views.like_view, name='like_view'),
 ]

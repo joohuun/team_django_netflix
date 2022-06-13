@@ -21,7 +21,15 @@ def detail(request, id):
     movie = MovieModel.objects.get(pk=id)
     return render(request, 'movie/detail.html', {'movie': movie})
 
+
 # @login_required
+# def like_view(request, movie_pk):
+#     if request.method == 'get':
+#         like_list = LikeModel.objects.filter(user=request.user, movie=movie_pk)
+#         return render(request, 'movie/detail.html', {'like_list': like_list})
+
+
+# # @login_required
 # def detail(request):
 #     if request.method == 'GET':
 #         movies = MovieModel.objects.all().order_by('title')

@@ -75,3 +75,20 @@ def sign_in(request):
 def logout(request):
     auth.logout(request)
     return redirect('/')
+
+##############
+def follow(request, username):
+    if request.method == 'POST':
+        target_user = UserModel.objects.get(username=username)
+        user = request.user
+        user.following.add(target_user)
+        user.save()
+        return redirect('/')
+    
+def view_follow(request):
+    if request.method == 'GET':
+        user = request.user
+        following = list(user.follow.all().values('username'))
+        return render(request, 'user/view_follow.html', {'following':following})
+    
+###############
