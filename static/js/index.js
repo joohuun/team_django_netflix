@@ -42,4 +42,4 @@ const userlike = new Carousel(".second");
 // 평점 상위 컨텐츠
 const ranking = new Carousel(".third");
 // 상세페이지 관련영화 추천
-const movie_related = new Carousel(".detail");
+const movie_related = new Carousel(".relation");

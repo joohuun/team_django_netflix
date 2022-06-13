@@ -30,13 +30,13 @@
                 <div class="nav">
                     <a class="nav-item" href="/">홈</a>
                     <a class="nav-item" href="#rate-ranking">상위 평점 영화</a>
-                    <a class="nav-item" href="#now_hottest">New! 요즘 대세영화</a>
+                    <a class="nav-item" href="#now_hottest">추천하는 영화</a>
                     <a class="nav-item" href="#like-contents">내가 찜한 콘텐츠</a>
                 </div>
                 <div class="menu">
                     <div id="search">
                     <form method="get" action="{% url 'movie:search' %}">
-                        <input type="search" name="search" placeholder="검색">
+                        <input type="search" name="kw" placeholder="검색">
                     </form>
                     </div>
                     <div class="menu-item">키즈</div>
