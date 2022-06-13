@@ -166,7 +166,7 @@
         <div class="wrapper">
             <div class="list-title">관련 영화 추천</div>
             <div class="carousel">
-                <div class="carouselbox detail">
+                <div class="carouselbox relation">
                     {% for movie, genres in infos.items %}
                     <div class="content">
                         <a href="{% url 'movie:recommend_movies' movie.pk %}">
