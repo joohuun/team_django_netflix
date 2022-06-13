@@ -29,8 +29,8 @@ class MovieModel(models.Model):
     rate = models.FloatField(blank=True, null=True)
     story = models.TextField(blank=True, null=True)
 
-    # user = models.ForeignKey(settings.AUTH_USER_MODEL,
-    #                          on_delete=models.CASCADE, default='')
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,
+                             on_delete=models.CASCADE, default='')
     like_users = models.ManyToManyField(
         settings.AUTH_USER_MODEL, related_name='like_articles', blank=True, null=True)
 

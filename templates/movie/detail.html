@@ -1,5 +1,7 @@
 {% extends 'base.html'%}
 {% block content%}
+
+{% comment %} 
     <li>pk:{{movie.pk}}</li>
     <img src="{{movie.imgurl}}">
     <li>title:{{movie.title}}</li>
@@ -18,5 +20,83 @@
           <input type="submit" value='좋아요'>
         {% endif %}
       </form>
+    </div> {% endcomment %}
+
+
+
+<!doctype html>
+<html lang="kr">
+
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Kong flix</title>
+    <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+          integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link rel="stylesheet" href="{% static 'css/index.css' %}"/>      
+</head>
+<body>
+<div class = "img-box">
+     <img src="{{movie.imgurl}}">
+</div>
+<main>
+    <div class="description">
+        <h1>{{movie.title}}</h1>
+        <h3> {{movie.age}} / {{movie.actors}}/ {{movie.rate}}</h3>
+        <p>{{movie.story}}</p>        
+        <div class="buttons">
+            <div>
+            <form action="{% url 'movie:likes' movie.pk %}" method='POST'>
+                {% csrf_token %}
+                {% if user in movie.like_users.all %}
+                <button class="play" value="좋아요 취소"><span>취소</span></button>
+                {% else %}
+                <button class="play" value="좋아요"><span>좋아요</span></button>
+                {% endif %}
+            </form>
+            </div>
+            <button class="detail"><i class="fa-solid fa-circle-info"></i>{{movie.like_users.count}}명이 좋아합니다.</button>
+        </div>
+    </div>    
+    <div class="age-info">
+        <i class="fa-solid fa-rotate-right"></i>
+        <div class="age">
+            {{movie.age}}
+        </div>
     </div>
+</main>
+
+<footer>
+    <div class="wrap">
+        <div class="social-icons">
+            <i class="fa-brands fa-facebook-square"></i>
+            <i class="fa-brands fa-instagram"></i>
+            <i class="fa-brands fa-twitter"></i>
+            <i class="fa-brands fa-youtube"></i>
+        </div>
+        <div class="options">
+            <div class="option">자막 및 음성</div>
+            <div class="option">음성 지원</div>
+            <div class="option">고객 센터</div>
+            <div class="option">기프트카드</div>
+            <div class="option">미디어 센터</div>
+            <div class="option">투자 정보(IR)</div>
+            <div class="option">입사 정보</div>
+            <div class="option">이용 약관</div>
+            <div class="option">개인 정보</div>
+            <div class="option">법적 고지</div>
+            <div class="option">쿠키 설정</div>
+            <div class="option">회사 정보</div>
+            <div class="option">문의하기</div>
+        </div>
+    </div>
+</footer>
+</body>
+</html>
 {% endblock %}
