@@ -6,16 +6,31 @@ from . import recommender_ml
 from . import collab_recommender
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+from django.db.models import Q
 
 # Create your views here.
+
+def main(request):
+    user = request.user.is_authenticated
+    if user:
+        return redirect('/home')
+    else:
+        return redirect('/sign-in')
+
+
+
+
+
 # 메인페이지
 @login_required
 def home(request):
     if request.method == 'GET':
+        print("user id =", end=""), print(request.user.id)
         user_based = collab_recommender.collab
         movies = user_based.collab_recommend(request.user.id)
-        print(request.user)
-        print(request.user.id)
+        # print(request.user)
+        # print(request.user.id)
+        
         rec ={}
         for movie in movies:
             genres = movie.genre.all()
@@ -106,11 +121,29 @@ def comment_delete(request,pk, id):
 
 # 좋아요
 @login_required
-def likes(request, movie_pk):
-    movie = get_object_or_404(MovieModel, pk=movie_pk)
+def likes(request, pk):
+    movie = get_object_or_404(MovieModel, pk=pk)
 
     if movie.like_users.filter(pk=request.user.pk).exists():
         movie.like_users.remove(request.user)
     else:
         movie.like_users.add(request.user)
-    return redirect('movie:recommend_movies', movie_pk)
+    return redirect('movie:recommend_movies', pk)
+
+
+
+# 검색
+def search(request):
+    if 'kw' in request.GET:
+        query = request.GET.get('kw', '')
+        movies = MovieModel.objects.all().filter(
+            Q(title__icontains=query) |
+            Q(actors__icontains=query)
+        )
+        infos = {}
+        genre_list = []
+        for movie in movies:
+            genres = movie.genre.all()
+            infos[movie] = genres
+        
+    return render(request, 'movie/search.html', {'query':query, 'movies':movies, 'genres':genres, 'infos': infos})

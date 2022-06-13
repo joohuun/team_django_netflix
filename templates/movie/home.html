@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,27 +6,21 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MAIN</title>
-
     <script src="https://kit.fontawesome.com/b57dd44d80.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../../static/css/movie_list.css"/>
     <script src="../../static/js/play.js"></script>
-    
-    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    
-
-    
 </head>
 <body>
     <!-- 비디오와 상단바 -->
     <div class="home">
         <!-- 비디오 -->
-        <video 
+        <video
         src="../../static/video/범죄도시2.mp4"
         autoplay
-        muted
-        width:100%
-        height: 100%
+        width: 80%
+        height: 80%
+        controls
         ></video>
         <!-- overlay -->
         <div class="overlay">
@@ -39,34 +34,33 @@
                     <a class="nav-item" href="#like-contents">내가 찜한 콘텐츠</a>
                 </div>
                 <div class="menu">
-                    <div class="menu-item">
-                        <i class="fa-solid fa-magnifying-glass"></i>
+                    <div id="search">
+                    <form method="get" action="{% url 'movie:search' %}" >
+                        <input type="search" name="kw" placeholder="검색">
+                    </form>
                     </div>
                     <div class="menu-item">키즈</div>
                     <div class="menu-item">
                         <i class="fa-solid fa-bell"></i>
                     </div>
-                    <a class="menu-item" href="logout/" style="color:white;">
+                    <a class="menu-item" href="{% url 'logout' %}" style="color:white;">
                         <i class="fa-solid fa-circle-user"></i>
                     </a>
                 </div>
             </div>
             <!-- 인기 영화 띄우기 -->
             <div class="banner">
-                <div class="series">인기 영화</div>
-                <div class="title">범죄도시 2</div>
+                <div class="series">  </div>
+                <div class="title" style="margin-top:40px">범죄도시 2</div>
                 <div class="badge"><b>한국에서 콘텐츠 순위 1위</b></div>
                 <div class="description">
                     “느낌 오지? 이 놈 잡아야 하는 거”
                     가리봉동 소탕작전 후 4년 뒤,
                     금천서 강력반은 베트남으로 도주한 용의자를 인도받아 오라는 미션을 받는다.
-                    
                     괴물형사 ‘마석도’(마동석)와 ‘전일만’(최귀화) 반장은 현지 용의자에게서 수상함을 느끼고,
                     그의 뒤에 무자비한 악행을 벌이는 ‘강해상’(손석구)이 있음을 알게 된다.
-                    
                     ‘마석도’와 금천서 강력반은 한국과 베트남을 오가며
                     역대급 범죄를 저지르는 ‘강해상’을 본격적으로 쫓기 시작하는데...
-                    
                     나쁜 놈들 잡는 데 국경 없다!
                     통쾌하고 화끈한 범죄 소탕 작전이 다시 펼쳐진다!
                 </div>
@@ -89,13 +83,11 @@
                 </div>
         </div>
     </div>
-
-
     <!-- 카테고리 -->
-    <div class="category-list">
-        <div class="wrapper">
+    <div class="category-list" style='margin-top:500px'>
+        <div clas="wrapper">
             <div class="list-title" id="now_hottest">지금 뜨는 컨텐츠</div>
-            <div class="carousel">
+            <div class="carousel">s
                 <div class="carouselbox first">
                     {% for movie, genres in rec.items %}
                         <div class="content">
@@ -125,11 +117,10 @@
                         </div>
                     {% endfor %}
                 </div>
-                <button class="switchLeft sliderButton" onclick="recommend.sliderScrollLeft()"><</a>
-                <button class="switchRight sliderButton" onclick="recommend.sliderScrollRight()">></butt>
+                <button class="switchLeft sliderButton" onclick="recommend.sliderScrollLeft()"><</button>
+                <button class="switchRight sliderButton" onclick="recommend.sliderScrollRight()">></button>
             </div>
         </div>
-
         <div class="wrapper">
             <div class="list-title" id="like-contents">{{user}}님이 찜한 컨텐츠</div>
             <div class="carousel">
@@ -162,12 +153,10 @@
                         </div>
                     {% endfor %}
                 </div>
-                <button class="switchLeft sliderButton" onclick="userlike.sliderScrollLeft()"><</a>
+                <button class="switchLeft sliderButton" onclick="userlike.sliderScrollLeft()"><</button>
                 <button class="switchRight sliderButton" onclick="userlike.sliderScrollRight()">></butt>
             </div>
         </div>
-
-
         <div class="wrapper">
             <div class="list-title" id="rate-ranking">평점 높은 영화</div>
             <div class="carousel">
@@ -200,17 +189,12 @@
                         </div>
                     {% endfor %}
                 </div>
-                <button class="switchLeft sliderButton" onclick="ranking.sliderScrollLeft()"><</a>
-                <button class="switchRight sliderButton" onclick="ranking.sliderScrollRight()">></butt>
+                <button class="switchLeft sliderButton" onclick="ranking.sliderScrollLeft()"><</button>
+                <button class="switchRight sliderButton" onclick="ranking.sliderScrollRight()">></button>
             </div>
         </div>
-
-    
-        
         <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.0.0-alpha.1/axios.js"></script>
         <script src="../../static/js/index.js"></script>
     </div>
-    
-    
 </body>
 </html>
